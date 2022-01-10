@@ -2,6 +2,5 @@
 	"id": "externalSourceConfigurator",
 	"name": "External Source Configurator",
 	"srcdoc": "index.html",
-	"fieldTypes": ["Object"],
-	"sampleData": ["rr", "canvas", "adjust"]
+	"fieldTypes": ["Object"]
 }
