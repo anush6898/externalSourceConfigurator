@@ -2,7 +2,7 @@
   "id": "externalSourceConfigurator",
   "name": "External Source Configurator",
   "srcdoc": "index.html",
-  "fieldTypes": ["JSON"],
+  "fieldTypes": ["Object"],
   "sampleData": {
     "hi": : "hello"
   }
