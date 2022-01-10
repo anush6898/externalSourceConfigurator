@@ -1,1 +1,7 @@
-
+<!DOCTYPE html>
+<script src="https://unpkg.com/@contentful/app-sdk@3"></script>
+<script>
+window.contentfulExtension.init(function(api) {
+  console.log(api.field.getValue());
+});
+</script>
