@@ -3,5 +3,5 @@
 	"name": "External Source Configurator",
 	"srcdoc": "index.html",
 	"fieldTypes": ["Object"],
-	"parameters": ["hi"]
+	"instance": ["hi"]
 }
