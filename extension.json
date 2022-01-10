@@ -1,0 +1,9 @@
+{
+  "id": "externalSourceConfigurator",
+  "name": "External Source Configurator",
+  "srcdoc": "index.html",
+  "fieldTypes": ["JSON"],
+  "sampleData": {
+    "hi": : "hello"
+  }
+}
