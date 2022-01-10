@@ -4,6 +4,6 @@
   "srcdoc": "index.html",
   "fieldTypes": ["Object"],
   "sampleData": {
-    "hi": : "hello"
+    "hi": "hello"
   }
 }
