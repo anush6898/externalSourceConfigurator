@@ -3,5 +3,17 @@
 	"name": "External Source Configurator",
 	"srcdoc": "index.html",
 	"fieldTypes": ["Object"],
-	"instance": ["hi"]
+	"parameters": {
+		"instance": [
+			{       
+				"id": "mode",
+				"name": "Mode",
+				"description": "Set the mode for syntax highlighting",
+				"type": "Enum",
+				"options": [{"javascript": "Javascript"}, {"csharp": "csharp"}, {"html": "HTML"}, {"css":"CSS"},{"razor":"Razor"},{"xml":"XML"},{"json":"JSON"}],
+				"labels": {"empty": "Choose the display mode"},
+				"required": true
+			}
+		]
+	}
 }
