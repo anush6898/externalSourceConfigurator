@@ -15,11 +15,13 @@
 				"required": true
 			},
 			{
-				"rr": {
+				"rr": [
+					{
 					"requesturl": "https://recs.richrelevance.com/rrserver/api/personalize?apiKey=212ef076ae59b7c9&apiClientKey=0fb6a09fdc84bbbf&sgs=women:women&excludeHtml=true&ssl=true[sessionId:&sessionId=@][zuid:&userId=@][store.rcs:&rcs=@]&placements=home_page.rr_pinnedpost2_1_app%7Chome_page.rr_pinnedpost2_2_app%7Chome_page.rr_pinnedpost2_3_app%7Chome_page.rr_pinnedpost2_4_app",
 					"headers": "{ 'Expires': 'Sat, 28 Nov 2009 05:36:25 GMT' }",
 					"store": "[{ 'key': 'rcs', 'from': 'body', 'mapping': 'Rcs', 'duration': 0 }]"
-				},
+					}
+				],
 				
 			}
 		]
