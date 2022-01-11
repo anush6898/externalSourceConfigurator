@@ -6,11 +6,11 @@
 	"parameters": {
 		"instance": [
 			{       
-				"id": "mode",
-				"name": "Mode",
-				"description": "Set the mode for syntax highlighting",
+				"id": "source",
+				"name": "Source",
+				"description": "Set the type of External source",
 				"type": "Enum",
-				"options": [{"javascript": "Javascript"}, {"csharp": "csharp"}, {"html": "HTML"}, {"css":"CSS"},{"razor":"Razor"},{"xml":"XML"},{"json":"JSON"}],
+				"options": [{"rr": "RR/Personalise"}, {"adjust": "Adjust"}, {"canvas": "Cavas"}],
 				"labels": {"empty": "Choose the display mode"},
 				"required": true
 			}
