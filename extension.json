@@ -11,7 +11,7 @@
 				"description": "Set the type of External source",
 				"type": "Enum",
 				"options": [{"rr": "RR/Personalise"}, {"adjust": "Adjust"}, {"canvas": "Cavas"}],
-				"labels": {"empty": "Choose the display mode"},
+				"labels": {"empty": "Choose the type of External source"},
 				"required": true
 			}
 		]
