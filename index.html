@@ -17,14 +17,34 @@
       rr: {
         name: "RR/Personalise",
         fields: ["Request URL", "Headers", "Store"],
+        placeholder: [
+          "https://recs.richrelevance.com/rrserver/api/personalize?apiKey=212ef076ae59b7c9&apiClientKey=0fb6a09fdc84bbbf&sgs=women:women&excludeHtml=true&ssl=true[sessionId:&sessionId=@][zuid:&userId=@][store.rcs:&rcs=@]&placements=home_page.rr_pinnedpost2_1_app%7Chome_page.rr_pinnedpost2_2_app%7Chome_page.rr_pinnedpost2_3_app%7Chome_page.rr_pinnedpost2_4_app",
+          "{ 'Expriration': 'Tue Jan 11 2022 17:28:25 GMT+0530' }",
+          "[{ 'key':'rcs', 'from':'body', 'mapping':'rcs', 'duration':0} ]",
+        ],
       },
-      canvas: { name: "Canvas", fields: ["Request URL", "Store"] },
+      canvas: {
+        name: "Canvas",
+        fields: ["Request URL", "Store"],
+        placeholder: [
+          "https://canvas.com/api/?apiKey=212ef076ae59b7c9&apiClientKey=0fb6a09fdc84bbbf&sgs=women:women&excludeHtml=true&ssl=true[sessionId:&sessionId=@][zuid:&userId=@][store.rcs:&rcs=@]",
+          "[{ 'key':'canvas', 'from':'body', 'mapping':'canvas', 'duration':0} ]",
+        ],
+      },
+      adjust: {
+        name: "Adjust",
+        fields: ["Request URL", "Headers"],
+        placeholder: [
+          "https://adjust.com/api/?apiKey=212ef076ae59b7c9&apiClientKey=0fb6a09fdc84bbbf&sgs=women:women&excludeHtml=true&ssl=true[sessionId:&sessionId=@][zuid:&userId=@][store.rcs:&rcs=@]",
+          "[{ 'key':'adjust', 'from':'body', 'mapping':'adjust', 'duration':0} ]",
+        ],
+      },
     };
 
-    const createFields = (name = "", fields = [], savedData = {}) => {
+    const createFields = ({ name, fields, placeholder }, savedData = {}) => {
       const h2 = document.createElement("h2");
       h2.innerHTML = name;
-      const inputCollection = fields.map((name) => {
+      const inputCollection = fields.map((name, index) => {
         const div = document.createElement("div");
         div.className = "cf-form-field";
         const label = document.createElement("label");
@@ -35,7 +55,7 @@
         input.id = id;
         input.className = "cf-form-input";
         // set values to the field if already saved
-        value ? (input.value = value) : null;
+        input.value = value ? value : placeholder[index];
         div.appendChild(label);
         div.appendChild(input);
 
@@ -68,15 +88,17 @@
     // Main function
     cfExtension.init(function (api) {
       api.window.updateHeight(380);
-      console.log(api);
 
       const source = api.parameters.instance.source;
-      const { name, fields } = config[source];
+      const { name, fields, placeholder } = config[source];
       const savedData = api.field.getValue() || {};
       const main = document.getElementById("main");
       const button = document.getElementById("btn-submit");
 
-      const finalFields = createFields(name, fields, savedData);
+      const finalFields = createFields(
+        { name, fields, placeholder },
+        savedData
+      );
 
       finalFields.forEach((item) => main.appendChild(item));
 
