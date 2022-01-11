@@ -1,13 +1,86 @@
-<!doctype html>
+<!DOCTYPE html>
 <head>
-  <link rel="stylesheet" href="https://unpkg.com/contentful-ui-extensions-sdk@3/dist/cf-extension.css">
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/contentful-ui-extensions-sdk@3/dist/cf-extension.css"
+  />
 </head>
 <body>
+  <div id="main"></div>
+  <button id="btn-submit" class="cf-btn-primary">Save</button>
+
   <script src="https://unpkg.com/contentful-ui-extensions-sdk@3"></script>
   <script src="https://unpkg.com/@contentful/app-sdk@3"></script>
   <script>
-    window.contentfulExtension.init(function(api) {
+    var cfExtension = window.contentfulExtension || window.contentfulWidget;
+    const config = {
+      rr: {
+        name: "RR/Personalise",
+        fields: ["Request URL", "Headers", "Store"],
+      },
+      canvas: { name: "Canvas", fields: ["Request URL", "Store"] },
+    };
+
+    const createFields = (name = "", fields = [], savedData = {}) => {
+      const h2 = document.createElement("h2");
+      h2.innerHTML = name;
+      const inputCollection = fields.map((name) => {
+        const div = document.createElement("div");
+        div.className = "cf-form-field";
+        const label = document.createElement("label");
+        label.innerHTML = name;
+        const input = document.createElement("input");
+        const id = name.replace(" ", "").toLowerCase();
+        const value = savedData[id];
+        input.id = id;
+        input.className = "cf-form-input";
+        // set values to the field if already saved
+        value ? (input.value = value) : null;
+        div.appendChild(label);
+        div.appendChild(input);
+
+        return div;
+      });
+
+      return [h2, inputCollection].flat();
+    };
+
+    const setValueToField = ({ field, dialogs }) => {
+      let fieldValue = {},
+        dailogConfig = {
+          title: "Success",
+          message: "The data is set to the field",
+          confirmLabel: "ok!",
+        };
+      const children = document.getElementById("main").childNodes;
+      for (let i = 0; i < children.length; i++) {
+        if (children[i].nodeName === "DIV") {
+          const lastChild = children[i].lastChild;
+          fieldValue[lastChild.id] = lastChild.value;
+        }
+      }
+      field
+        .setValue(fieldValue)
+        .then((data) => dialogs.openAlert(dailogConfig))
+        .catch((err) => console.error(err));
+    };
+
+    // Main function
+    cfExtension.init(function (api) {
+      api.window.updateHeight(380);
       console.log(api);
+
+      const source = api.parameters.instance.source;
+      const { name, fields } = config[source];
+      const savedData = api.field.getValue() || {};
+      const main = document.getElementById("main");
+      const button = document.getElementById("btn-submit");
+
+      const finalFields = createFields(name, fields, savedData);
+
+      finalFields.forEach((item) => main.appendChild(item));
+
+      button.onclick = () => setValueToField(api);
     });
   </script>
 </body>
